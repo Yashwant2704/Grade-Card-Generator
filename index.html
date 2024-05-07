@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grade Card Generator</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js"></script>
+    <script src="script.js" defer></script>
+    <style>
+        #gradeCard {
+            margin: 20px auto;
+        }
+        #sgpaDisplay,
+        #cgpaDisplay {
+            text-align: center;
+            margin-top: 10px;
+        }
+        /* New styles for aligning input fields */
+        form label {
+            display: block;
+            margin-bottom: 15px; /* Add some more spacing between input fields */
+        }
+        form input {
+            width: 70%; /* Make input fields shorter */
+            padding: 5px;
+            margin-bottom: 20px; /* Add space between input field and next label */
+            box-sizing: border-box; /* Include padding in width calculation */
+        }
+        form button {
+            margin-top: 10px; /* Add some spacing below the button */
+        }
+    </style>
+</head>
+<body>
+
+    <section id="studentDetails">
+        <h2>Student Details</h2>
+        <form id="studentDetailsForm">
+            <label for="prn">PRN:</label>
+            <input type="text" id="prn" name="prn" required>
+
+            <label for="seat">Seat No:</label>
+            <input type="number" id="seat" name="seat" required>
+
+            <label for="year">Year:</label>
+            <input type="text" id="year" name="year" required>
+
+            <label for="semester">Semester:</label>
+            <input type="text" id="semester" name="semester" required>
+            <label for="studentName">Student Name:</label>
+            <input type="text" id="studentName" name="studentName" required>
+
+            <label for="examMonth">Exam Month:</label>
+            <input type="text" id="examMonth" name="examMonth" required>
+
+            <label for="examYear">Exam Year:</label>
+            <input type="text" id="examYear" name="examYear" required>
+
+            <label for="registrationYear">Year of Registration:</label>
+            <input type="text" id="registrationYear" name="registrationYear" required>
+
+
+            <button type="submit">Next</button>
+        </form>
+    </section>
+
+    <section id="courseDetails" style="display: none;">
+        <h2>Course Details</h2>
+        <form id="courseDetailsForm">
+            <label for="courseCode">Course Code:</label>
+            <input type="text" id="courseCode" name="courseCode" required>
+
+            <label for="courseTitle">Course Title:</label>
+            <input type="text" id="courseTitle" name="courseTitle" required>
+
+            <label for="credits">Credits:</label>
+            <input type="number" id="credits" name="credits" required>
+
+            <label for="grade">Grade:</label>
+            <input type="text" id="grade" name="grade" required>  
+
+            <button type="submit">Add Course</button>
+        </form>
+
+        <table id="gradeCard">
+            <thead>
+                <tr>
+                    <th>Course Code</th>
+                    <th>Course Title</th>
+                    <th>Credits</th>
+                    <th>Grade</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Course details will be inserted here -->
+            </tbody>
+        </table>
+        <div id="sgpaDisplay">SGPA: <span id="sgpaValue">0.00</span></div>
+            <div id="cgpaDisplay">CGPA: <span id="cgpaValue">0.00</span></div>
+            <button id="generateGradeCard">Generate Grade Card</button>
+    </section>
+    
+
+    <!-- Container for PDF content -->
+    <div id="pdfContent" style="display: none;">
+        <div id="studentInfo"></div>
+        <table id="pdfGradeCard">
+            <!-- Course details will be inserted here -->
+        </table>
+    </div>
+    
+</body>
+</html>

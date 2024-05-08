@@ -97,7 +97,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
         if (cgpaValue) {
             const totalSGPA = parseFloat(document.getElementById('sgpaValue').textContent);
-            const totalSemesters = Object.keys(studentDetails).length;
+            const totalSemesters = 1; // Just for now, calculating CGPA for the current semester
     
             const cgpa = totalSemesters !== 0 ? totalSGPA / totalSemesters : 0;
             cgpaValue.textContent = cgpa.toFixed(2);

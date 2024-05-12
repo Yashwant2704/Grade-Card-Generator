@@ -108,88 +108,84 @@ document.addEventListener('DOMContentLoaded', function() {
     
 
     function generatePDF() {
-        // Get student name, exam month, exam year, and year of registration from the form
-        const studentName = document.getElementById('studentName').value;
-        const examMonth = document.getElementById('examMonth').value;
-        const examYear = document.getElementById('examYear').value;
-        const registrationYear = document.getElementById('registrationYear').value;
-    
-        // Get other required elements
-        const sgpaDisplay = document.getElementById('sgpaDisplay');
-        const cgpaDisplay = document.getElementById('cgpaDisplay');
-        const gradeCard = document.getElementById('gradeCard');
-    
-        // Check if all elements are present and have content
-        if (!sgpaDisplay || !cgpaDisplay || !gradeCard || courseDetails.length === 0) {
-            console.error("Required elements for PDF generation not found or data missing");
-            return;
-        }
-    
-        // Create a new HTML template for PDF content with margins
-        const pdfContent = `
-            <div style="margin: 0.5in;">
-            <h2 style="text-align: center;">Grade Card</h2>
-                <table style="margin: auto;">
-                    <tr>
-                        <td>Student Name:</td>
-                        <td>${studentName}</td>
-                    </tr>
-                    <tr>
-                        <td>PRN:</td>
-                        <td>${studentDetails['prn']}</td>
-                    </tr>
-                    <tr>
-                        <td>Seat No:</td>
-                        <td>${studentDetails['seat']}</td>
-                    </tr>
-                    <tr>
-                        <td>Year:</td>
-                        <td>${studentDetails['year']}</td>
-                    </tr>
-                    <tr>
-                        <td>Semester:</td>
-                        <td>${studentDetails['semester']}</td>
-                    </tr>
-                    <tr>
-                        <td>Exam Month:</td>
-                        <td>${examMonth}</td>
-                    </tr>
-                    <tr>
-                        <td>Exam Year:</td>
-                        <td>${examYear}</td>
-                    </tr>
-                    <tr>
-                        <td>Year of Registration:</td>
-                        <td>${registrationYear}</td>
-                    </tr>
-                </table>
-            </div>
-            <div style="margin: 0.5in;">
-                ${gradeCard.outerHTML}
-            </div>
-            <div style="margin: 1in; text-align: center;">
-                <table style="margin: 0.5in;">
-                    <tr>
-                        <td>SGPA</td>
-                        <td>CGPA</td>
-                    </tr>
-                    <tr>
-                        <td>${sgpaDisplay.textContent}</td>
-                        <td>${cgpaDisplay.textContent}</td>
-                    </tr>
-                </table>
-            </div>
-        `;
-    
-        // Create PDF
-        const options = {
-            filename: 'grade_card.pdf',
-            image: { type: 'jpeg', quality: 0.98 },
-            html2canvas: { scale: 2 },
-            jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
-        };
-        html2pdf().from(pdfContent).set(options).save();
+    // Get student name, exam month, exam year, and year of registration from the form
+    const studentName = document.getElementById('studentName').value;
+    const examMonth = document.getElementById('examMonth').value;
+    const examYear = document.getElementById('examYear').value;
+    const registrationYear = document.getElementById('registrationYear').value;
+
+    // Get other required elements
+    const sgpaDisplay = document.getElementById('sgpaDisplay');
+    const cgpaDisplay = document.getElementById('cgpaDisplay');
+    const gradeCard = document.getElementById('gradeCard');
+
+    // Check if all elements are present and have content
+    if (!sgpaDisplay || !cgpaDisplay || !gradeCard || courseDetails.length === 0) {
+        console.error("Required elements for PDF generation not found or data missing");
+        return;
     }
+
+    // Create a new HTML template for PDF content with margins
+    const pdfContent = `
+        <div style="margin: 0.5in;">
+        <h2 style="text-align: center;">Grade Card</h2>
+            <table style="margin: auto;">
+                <tr>
+                    <td>Student Name:</td>
+                    <td>${studentName}</td>
+                </tr>
+                <tr>
+                    <td>PRN:</td>
+                    <td>${studentDetails['prn']}</td>
+                </tr>
+                <tr>
+                    <td>Seat No:</td>
+                    <td>${studentDetails['seat']}</td>
+                </tr>
+                <tr>
+                    <td>Year:</td>
+                    <td>${studentDetails['year']}</td>
+                </tr>
+                <tr>
+                    <td>Semester:</td>
+                    <td>${studentDetails['semester']}</td>
+                </tr>
+                <tr>
+                    <td>Exam Month:</td>
+                    <td>${examMonth}</td>
+                </tr>
+                <tr>
+                    <td>Exam Year:</td>
+                    <td>${examYear}</td>
+                </tr>
+                <tr>
+                    <td>Year of Registration:</td>
+                    <td>${registrationYear}</td>
+                </tr>
+            </table>
+        </div>
+        <div style="margin: 0.5in;">
+            ${gradeCard.outerHTML}
+        </div>
+        <div style="margin: 1in; text-align: center;">
+            <table style="margin: 0.5in;">
+                <tr>
+                    <td>SGPA</td>
+                    <td>CGPA</td>
+                </tr>
+                <tr>
+                    <td>${sgpaDisplay.textContent}</td>
+                    <td>${cgpaDisplay.textContent}</td>
+                </tr>
+            </table>
+        </div>
+    `;
+
+    // Create a new window and write the PDF content
+    const newWindow = window.open('', '_blank');
+    newWindow.document.write(pdfContent);
+}
+
     
     
 });

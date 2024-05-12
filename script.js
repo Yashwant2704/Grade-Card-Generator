@@ -193,13 +193,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Open PDF in new tab instead of downloading
     pdf.toPdf().output('datauristring', function (data) {
-        const iframe = document.createElement('iframe');
-        iframe.src = data;
-        iframe.style.width = '100%';
-        iframe.style.height = '100%';
-        document.body.appendChild(iframe);
+        window.open(data, '_blank');
     });
 }
+
 
     
     

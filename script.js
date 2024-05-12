@@ -182,13 +182,22 @@ document.addEventListener('DOMContentLoaded', function() {
         `;
     
         // Create PDF
-        const options = {
-            filename: 'grade_card.pdf',
-            image: { type: 'jpeg', quality: 0.98 },
-            html2canvas: { scale: 2 },
-            jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
-        };
-        html2pdf().from(pdfContent).set(options).open();
+    const options = {
+      filename: 'grade_card.pdf',
+      image: { type: 'jpeg', quality: 0.98 },
+      html2canvas: { scale: 2 },
+      jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+    };
+    const pdf = html2pdf().from(pdfContent).set(options);
+
+    // Open PDF in new tab instead of downloading
+    const blob = pdf.output('blob');
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.target = '_blank';
+    a.click();
+
     }
     
     

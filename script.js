@@ -184,7 +184,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // Create PDF
         const options = {
             filename: 'grade_card.pdf',
-            image: { type: 'jpeg', quality: 0.98 },
+            image: { type: 'png', quality: 0.98 },
             html2canvas: { scale: 2 },
             jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
         };
